@@ -7,6 +7,8 @@ from google import genai
 from anthropic import Anthropic
 from openai import OpenAI
 
+from qa_validator import build_qa_report
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -40,8 +42,10 @@ Your role:
 - Clearly distinguish historical data from the 2026 estimate.
 - Do not invent facts that are not supported by the data.
 - Calculate simple percentage or absolute changes when useful.
+- Do not claim causes unless the supplied data supports them.
 
-Return a structured analytical text that another AI model can use for further strategic analysis.
+Return a structured analytical text that another AI model can use
+for further strategic analysis.
 
 DATA:
 {json.dumps(data, ensure_ascii=False, indent=2)}
@@ -74,6 +78,7 @@ Your role:
 - Pay special attention to the fact that 2026 is an estimate.
 - Do not invent information outside the supplied data.
 - Clearly separate observations from strategic interpretation.
+- Do not present unsupported causal explanations as facts.
 
 ORIGINAL IEA DATA:
 {json.dumps(data, ensure_ascii=False, indent=2)}
@@ -96,7 +101,20 @@ GEMINI MARKET ANALYSIS:
     return message.content[0].text
 
 
-def ask_openai(data, gemini_analysis, claude_analysis):
+def run_qa(data, gemini_analysis, claude_analysis):
+    return build_qa_report(
+        data,
+        gemini_analysis,
+        claude_analysis,
+    )
+
+
+def ask_openai(
+    data,
+    gemini_analysis,
+    claude_analysis,
+    qa_report,
+):
     client = OpenAI(
         api_key=os.getenv("OPENAI_API_KEY")
     )
@@ -110,35 +128,41 @@ Create a concise but professional final market research report using:
 1. The original IEA data.
 2. Gemini's market trend analysis.
 3. Claude's risk, opportunity and strategy analysis.
+4. The Evidence / QA validation report.
 
 Your responsibilities:
+- Write the entire final report in Turkish.
+- Use clear, professional and natural Turkish suitable for a user-facing market research report.
+- Write all titles, section headings, table headings, labels and body text in Turkish. Do not use English headings.
 - Synthesize the findings instead of simply repeating them.
 - Highlight the most important market trends.
 - Compare the major regions.
 - Include important numerical findings.
 - Clearly label 2026 values as estimates.
 - Distinguish factual observations from interpretation.
+- Treat QA REVIEW warnings as claims requiring caution or qualification.
+- Do not repeat unsupported causal claims as established facts.
 - Mention important limitations caused by the small dataset.
 - Do not invent facts.
 - Do not claim that the data proves causation.
 
 Use the following structure:
 
-# Global EV Market Research
+## Küresel Elektrikli Araç Pazarı Araştırması
 
-## Executive Summary
+## Yönetici Özeti
 
-## Key Market Trends
+## Temel Pazar Eğilimleri
 
-## Regional Analysis
+## Bölgesel Analiz
 
-## Risks and Opportunities
+## Riskler ve Fırsatlar
 
-## Strategic Implications
+## Stratejik Çıkarımlar
 
-## Data Limitations
+## Veri Sınırlamaları
 
-## Conclusion
+## Sonuç
 
 ORIGINAL IEA DATA:
 {json.dumps(data, ensure_ascii=False, indent=2)}
@@ -148,6 +172,9 @@ GEMINI ANALYSIS:
 
 CLAUDE ANALYSIS:
 {claude_analysis}
+
+EVIDENCE / QA REPORT:
+{qa_report}
 """
 
     response = client.responses.create(
@@ -168,10 +195,10 @@ def main():
 
     REPORTS_DIR.mkdir(parents=True, exist_ok=True)
 
-    print("1/4 - IEA verisi okunuyor...")
+    print("1/5 - IEA verisi okunuyor...")
     data = load_research_data()
 
-    print("2/4 - Gemini pazar analizi yapıyor...")
+    print("2/5 - Gemini pazar analizi yapıyor...")
     gemini_analysis = ask_gemini(data)
 
     save_text(
@@ -179,7 +206,7 @@ def main():
         gemini_analysis
     )
 
-    print("3/4 - Claude risk ve strateji analizi yapıyor...")
+    print("3/5 - Claude risk ve strateji analizi yapıyor...")
     claude_analysis = ask_claude(
         data,
         gemini_analysis
@@ -190,16 +217,35 @@ def main():
         claude_analysis
     )
 
-    print("4/4 - ChatGPT final raporu oluşturuyor...")
+    print("4/5 - Evidence / QA kontrolü yapılıyor...")
+    qa_report = run_qa(
+        data,
+        gemini_analysis,
+        claude_analysis,
+    )
+
+    save_text(
+        REPORTS_DIR / "qa_report.md",
+        qa_report
+    )
+
+    print("5/5 - ChatGPT final raporu oluşturuyor...")
     final_report = ask_openai(
         data,
         gemini_analysis,
-        claude_analysis
+        claude_analysis,
+        qa_report,
     )
 
     save_text(
         REPORTS_DIR / "final_report.md",
         final_report
+    )
+
+    save_text(
+        BASE_DIR / "src" / "final_report.md",
+        final_report
+
     )
 
     print()
@@ -208,6 +254,7 @@ def main():
     print("Oluşturulan dosyalar:")
     print("- reports/gemini_analysis.txt")
     print("- reports/claude_analysis.txt")
+    print("- reports/qa_report.md")
     print("- reports/final_report.md")
 
 
