@@ -1,0 +1,25 @@
+# API anahtarları
+.env
+
+# Python geçici dosyaları
+__pycache__/
+*.pyc
+
+# Sanal ortam
+.venv/
+venv/
+
+# Editör / Windows
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Toplanan pazar verileri
+data/
+
+# AI analiz ve final raporları
+reports/
+
+# Geçici API test dosyaları
+test_*.py
