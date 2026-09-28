@@ -1,11 +1,11 @@
-const ctx = document.getElementById("salesChart");
+﻿const ctx = document.getElementById("salesChart");
 
 async function loadMarketData() {
     try {
-        const response = await fetch("../outputs/iea_ev_sales.json");
+        const response = await fetch("iea_ev_sales.json");
 
         if (!response.ok) {
-            throw new Error(`JSON yüklenemedi: ${response.status}`);
+            throw new Error(`JSON yÃ¼klenemedi: ${response.status}`);
         }
 
         const marketData = await response.json();
@@ -19,7 +19,7 @@ async function loadMarketData() {
 
             datasets: [
                 {
-                    label: "Çin",
+                    label: "Ã‡in",
                     data: marketData.veriler.map(item => item.cin_milyon),
                     borderWidth: 3,
                     tension: 0.35,
@@ -43,7 +43,7 @@ async function loadMarketData() {
                     pointHoverRadius: 7
                 },
                 {
-                    label: "Diğer Dünya",
+                    label: "DiÄŸer DÃ¼nya",
                     data: marketData.veriler.map(item => item.diger_dunya_milyon),
                     borderWidth: 3,
                     tension: 0.35,
@@ -115,7 +115,7 @@ async function loadMarketData() {
 
                         title: {
                             display: true,
-                            text: "Milyon araç",
+                            text: "Milyon araÃ§",
                             color: "#91a4b7"
                         },
 
@@ -136,11 +136,11 @@ async function loadMarketData() {
         });
 
         console.log(
-            `IEA verisi yüklendi: ${marketData.veriler.length} dönem`
+            `IEA verisi yÃ¼klendi: ${marketData.veriler.length} dÃ¶nem`
         );
 
     } catch (error) {
-        console.error("EV pazar verisi yüklenirken hata oluştu:", error);
+        console.error("EV pazar verisi yÃ¼klenirken hata oluÅŸtu:", error);
     }
 }
 
@@ -157,13 +157,13 @@ async function loadFinalReport() {
         const response = await fetch("final_report.md");
 
         if (!response.ok) {
-            throw new Error(`Rapor yüklenemedi: ${response.status}`);
+            throw new Error(`Rapor yÃ¼klenemedi: ${response.status}`);
         }
 
                 const markdown = await response.text();
 
-        const summaryStart = markdown.indexOf("## Yönetici Özeti");
-        const summaryEnd = markdown.indexOf("## Temel Pazar Eğilimleri");
+        const summaryStart = markdown.indexOf("## YÃ¶netici Ã–zeti");
+        const summaryEnd = markdown.indexOf("## Temel Pazar EÄŸilimleri");
 
         let displayMarkdown = markdown;
 
@@ -182,14 +182,14 @@ async function loadFinalReport() {
 
         reportContainer.innerHTML = `<div class="generated-report"><p>${html}</p></div>`;
 
-        console.log("AI final raporu siteye yüklendi.");
+        console.log("AI final raporu siteye yÃ¼klendi.");
 
     } catch (error) {
-        console.error("AI raporu yüklenirken hata oluştu:", error);
+        console.error("AI raporu yÃ¼klenirken hata oluÅŸtu:", error);
 
         reportContainer.innerHTML = `
             <p>
-                Güncel AI araştırma raporu şu anda yüklenemiyor.
+                GÃ¼ncel AI araÅŸtÄ±rma raporu ÅŸu anda yÃ¼klenemiyor.
             </p>
         `;
     }

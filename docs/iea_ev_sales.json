@@ -1,0 +1,62 @@
+{
+    "kaynak": "IEA",
+    "birim": "million vehicles",
+    "veriler": [
+        {
+            "yil": 2020,
+            "tahmin": false,
+            "cin_milyon": 1.1,
+            "avrupa_milyon": 1.4,
+            "abd_milyon": 0.3,
+            "diger_dunya_milyon": 0.2
+        },
+        {
+            "yil": 2021,
+            "tahmin": false,
+            "cin_milyon": 3.3,
+            "avrupa_milyon": 2.3,
+            "abd_milyon": 0.6,
+            "diger_dunya_milyon": 0.3
+        },
+        {
+            "yil": 2022,
+            "tahmin": false,
+            "cin_milyon": 6.0,
+            "avrupa_milyon": 2.7,
+            "abd_milyon": 1.0,
+            "diger_dunya_milyon": 0.6
+        },
+        {
+            "yil": 2023,
+            "tahmin": false,
+            "cin_milyon": 8.1,
+            "avrupa_milyon": 3.2,
+            "abd_milyon": 1.4,
+            "diger_dunya_milyon": 1.0
+        },
+        {
+            "yil": 2024,
+            "tahmin": false,
+            "cin_milyon": 11.2,
+            "avrupa_milyon": 3.2,
+            "abd_milyon": 1.5,
+            "diger_dunya_milyon": 1.4
+        },
+        {
+            "yil": 2025,
+            "tahmin": false,
+            "cin_milyon": 13.2,
+            "avrupa_milyon": 4.2,
+            "abd_milyon": 1.5,
+            "diger_dunya_milyon": 2.0
+        },
+        {
+            "yil": 2026,
+            "tahmin": true,
+            "cin_milyon": 14.3,
+            "avrupa_milyon": 5.0,
+            "abd_milyon": 1.2,
+            "diger_dunya_milyon": 2.9
+        }
+    ]
+}
