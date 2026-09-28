@@ -133,6 +133,36 @@ def pazar_altyapi_verilerini_cikar(sayfalar):
                     sonuc["ac_sarj_noktasi"] = degerler[-1]
                     break
 
+    # Toplam kurulu güç (MW)
+    kurulu_guc_sayfasi = sayfa_metnini_bul(
+        sayfalar,
+        "Şarj İstasyonları Toplam Kurulu Gücü",
+    )
+
+    if kurulu_guc_sayfasi:
+        satirlar = kurulu_guc_sayfasi["metin"].splitlines()
+
+        for satir in satirlar:
+            degerler = satir.split()
+
+            if len(degerler) == 13 and all(
+                re.fullmatch(r"\d{1,3}(?:\.\d{3})+", deger)
+                for deger in degerler
+            ):
+                sonuc["toplam_kurulu_guc_mw"] = degerler[-1]
+                break
+
+        # Kurulu g?? / elektrikli ara? (kW/EA)
+        for satir in satirlar:
+            degerler = satir.split()
+
+            if len(degerler) == 13 and all(
+                re.fullmatch(r"\d+,\d+", deger)
+                for deger in degerler
+            ):
+                sonuc["kurulu_guc_kw_arac"] = degerler[-1]
+                break
+
     # DC = Toplam - AC
     if (
         "toplam_sarj_noktasi" in sonuc
