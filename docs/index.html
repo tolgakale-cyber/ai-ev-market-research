@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Yapay Zekâ Destekli EV Pazar Araştırması</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<main class="page">
+
+    <!-- HERO -->
+    <header class="hero">
+
+        <span class="project-label">
+            AI ORKESTRASYON PROJESİ · v1.0
+        </span>
+
+        <h1>
+            Yapay Zekâ Destekli<br>
+            EV Pazar Araştırması
+        </h1>
+
+        <p class="hero-description">
+            IEA (Uluslararası Enerji Ajansı) verileri; verileri; Gemini, Claude ve ChatGPT tarafından çok aşamalı
+            bir araştırma pipeline'ı ile analiz edilir. Küresel elektrikli
+            araç pazarının mevcut durumu, büyüme trendleri ve 2026 tahminleri
+            görselleştirilir ve doğrulanmış bulgular sunulur.
+        </p>
+
+        <div class="hero-actions">
+
+            <span class="data-badge">
+                IEA · 2020–2026
+            </span>
+
+            <a
+                class="github-button"
+                href="https://github.com/tolgakale-cyber/ai-ev-market-research"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                GitHub'da İncele →
+            </a>
+
+        </div>
+
+        <p class="estimate-note">
+            2026 değerleri gerçekleşmiş satışlar değil, IEA tahminidir.
+        </p>
+
+    </header>
+
+
+    <!-- 01 -->
+    <section class="section">
+
+        <div class="section-number">
+            01
+        </div>
+
+        <div class="section-content">
+
+            <div class="section-heading">
+                <h2>Pazar Görünümü</h2>
+
+                <p>
+                    Küresel elektrikli araç pazarının 2020–2026 dönemindeki
+                    gelişimi ve bölgelere göre satış verileri.
+                </p>
+            </div>
+
+
+            <div class="metrics">
+
+                <article class="metric-card">
+                    <span>2025 Küresel Satış</span>
+                    <strong>20,9 M</strong>
+                    <small>milyon araç</small>
+                </article>
+
+                <article class="metric-card">
+                    <span>2026 Tahmini</span>
+                    <strong>23,4 M</strong>
+                    <small>+%12 yıllık değişim</small>
+                </article>
+
+                <article class="metric-card">
+                    <span>En Büyük Pazar</span>
+                    <strong>Çin</strong>
+                    <small>2025 · 13,2 milyon</small>
+                </article>
+
+                <article class="metric-card">
+                    <span>Kalite Kontrolü</span>
+                    <strong>8 / 8</strong>
+                    <small>sayısal kontrol başarılı</small>
+                </article>
+
+            </div>
+
+
+            <article class="panel chart-panel">
+
+                <div class="panel-heading">
+                    <h3>Bölgelere Göre EV Satışları</h3>
+
+                    <span>Milyon araç</span>
+                </div>
+
+                <div class="chart-wrapper">
+                    <canvas id="salesChart"></canvas>
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- 02 -->
+    <section class="section">
+
+        <div class="section-number">
+            02
+        </div>
+
+        <div class="section-content">
+
+            <div class="section-heading">
+                <h2>Bölgesel Analiz</h2>
+
+                <p>
+                    2026 tahminleri ve 2025–2026 yıllık değişim oranları.
+                </p>
+            </div>
+
+
+            <div class="region-grid">
+
+                <article class="region-card">
+                    <span>Çin</span>
+
+                    <div>
+                        <strong>14,3 M</strong>
+                        <small class="positive">+%8,3</small>
+                    </div>
+                </article>
+
+
+                <article class="region-card">
+                    <span>Avrupa</span>
+
+                    <div>
+                        <strong>5,0 M</strong>
+                        <small class="positive">+%19,0</small>
+                    </div>
+                </article>
+
+
+                <article class="region-card">
+                    <span>ABD</span>
+
+                    <div>
+                        <strong>1,2 M</strong>
+                        <small class="negative">-%20,0</small>
+                    </div>
+                </article>
+
+
+                <article class="region-card">
+                    <span>Diğer Dünya</span>
+
+                    <div>
+                        <strong>2,9 M</strong>
+                        <small class="positive">+%45,0</small>
+                    </div>
+                </article>
+
+            </div>
+
+
+            <article class="panel insight-panel">
+
+                <h3>Öne Çıkan Bulgular</h3>
+
+                <ul>
+                    <li>
+                        Küresel EV hacmi 2020'de 3,0 milyondan
+                        2025'te 20,9 milyona yükseldi.
+                    </li>
+
+                    <li>
+                        Çin 2025 yılında toplam hacmin yaklaşık
+                        %63'ünü oluşturdu.
+                    </li>
+
+                    <li>
+                        Avrupa 2023–2024 dönemindeki yatay seyrin
+                        ardından 2025'te yeniden büyüdü.
+                    </li>
+
+                    <li>
+                        ABD, 2026 tahmininde düşüş gösteren tek bölge.
+                    </li>
+
+                    <li>
+                        Diğer Dünya grubu 2026 için en yüksek
+                        tahmini büyüme oranına sahip.
+                    </li>
+                </ul>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- 03 -->
+    <section class="section">
+
+        <div class="section-number">
+            03
+        </div>
+
+        <div class="section-content">
+
+            <div class="section-heading">
+                <h2>Sistem Mimarisi</h2>
+
+                <p>
+                    Araştırma, analiz, doğrulama ve sentez adımlarından
+                    oluşan çok aşamalı AI pipeline.
+                </p>
+            </div>
+
+
+            <div class="pipeline">
+
+                <article class="pipeline-card">
+                    <span>01</span>
+                    <strong>IEA</strong>
+                    <small>Kaynak veri</small>
+                </article>
+
+                <div class="arrow">→</div>
+
+                <article class="pipeline-card">
+                    <span>02</span>
+                    <strong>Gemini</strong>
+                    <small>Pazar & trend</small>
+                </article>
+
+                <div class="arrow">→</div>
+
+                <article class="pipeline-card">
+                    <span>03</span>
+                    <strong>Claude</strong>
+                    <small>Risk & strateji</small>
+                </article>
+
+                <div class="arrow">→</div>
+
+                <article class="pipeline-card">
+                    <span>04</span>
+                    <strong>QA</strong>
+                    <small>Kanıt doğrulama</small>
+                </article>
+
+                <div class="arrow">→</div>
+
+                <article class="pipeline-card">
+                    <span>05</span>
+                    <strong>ChatGPT</strong>
+                    <small>Final sentez</small>
+                </article>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- 04 -->
+    <section class="section">
+
+        <div class="section-number">
+            04
+        </div>
+
+        <div class="section-content">
+
+            <div class="section-heading">
+                <h2>Kanıt ve Kalite Kontrolü</h2>
+
+                <p>
+                    AI çıktılarındaki kritik sayısal bulgular kaynak
+                    veriye karşı deterministik Python kontrolleriyle
+                    doğrulanır.
+                </p>
+            </div>
+
+
+            <article class="panel qa-panel">
+
+                <div>
+                    <span class="qa-label">
+                        KAYNAK DOĞRULAMA
+                    </span>
+
+                    <h3>Sayısal Kontroller</h3>
+
+                    <p>
+                        2026 tahmin durumu, küresel toplamlar,
+                        bölgesel değerler ve yıllık değişim oranları
+                        yapılandırılmış JSON kaynağına karşı kontrol edilir.
+                    </p>
+                </div>
+
+                <div class="qa-score">
+                    <strong>8/8</strong>
+                    <span>PASS</span>
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- 05 -->
+    <section class="section">
+
+        <div class="section-number">
+            05
+        </div>
+
+        <div class="section-content">
+
+            <div class="section-heading">
+                <h2>Araştırma Raporu</h2>
+
+                <p>
+                    Çoklu model analizleri ve QA sonuçlarının ardından
+                    oluşturulan final sentez.
+                </p>
+            </div>
+
+
+            <article class="panel report-panel">
+
+                <span class="report-label">
+                    AI SENTEZİ · GÜNCEL RAPOR
+                </span>
+
+                <div id="final-report">
+                    <p>AI araştırma raporu yükleniyor...</p>
+                </div>
+
+             </article>
+
+        </div>
+
+    </section>
+
+
+    <footer>
+        <p>
+            Kaynak: IEA (Uluslararası Enerji Ajansı)
+        </p>
+
+        <p>
+            Multi-model AI Market Research Pipeline · v1.0
+        </p>
+    </footer>
+
+</main>
+
+
+<script src="app.js"></script>
+
+</body>
+</html>
