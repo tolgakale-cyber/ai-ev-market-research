@@ -98,6 +98,18 @@ def epdk_aylik_raporlari_topla():
 
     return raporlar
 
+def epdk_raporu_indir(rapor, dosya_yolu):
+    response = requests.get(rapor["url"], timeout=30)
+    response.raise_for_status()
+
+    if not response.content.startswith(b"%PDF"):
+        raise ValueError("EPDK raporu PDF formatında değil.")
+
+    with open(dosya_yolu, "wb") as dosya:
+        dosya.write(response.content)
+
+    return dosya_yolu
+
 if __name__ == "__main__":
     print("\nEPDK aylık raporları:")
 
